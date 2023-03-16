@@ -1,5 +1,7 @@
 -- create a function that returns the text hello world please
+
 DELIMITER //
+DROP FUNCTION IF EXISTS helloworld;
 create function helloworld()
 returns varchar(50)
  		
@@ -16,6 +18,7 @@ DELIMITER ;
 
 -- create a function to convert celsius to farenheit
 DELIMITER //
+DROP FUNCTION IF EXISTS celsius_to_farenheit;
 create function celsius_to_farenheit(celsius float)
 returns float
  		
@@ -28,6 +31,7 @@ DELIMITER ;
 
 -- Create a function that returns the course name of a course id
 DELIMITER //
+DROP FUNCTION IF EXISTS course_name;
 create function course_name(course_id varchar(50))
 returns varchar(50)
  		
@@ -40,23 +44,28 @@ DELIMITER ;
 
 -- Create a function to determine your email address at a school
 DELIMITER //
-create function email_address(first_name varchar(50), last_name varchar(50), school varchar(50))
-returns varchar(50)
+DROP FUNCTION IF EXISTS email_address;
+create function email_address(first_name varchar(50), last_name varchar(50))
+returns varchar(255)
  		
  			
  				begin
- 					return concat(first_name, '.', last_name, '@', school, '.vcc.ca');
+                    DECLARE email VARCHAR(115);
+ 					SET EMAIL = lower(concat(trim(first_name), '.', trim(last_name), '@student.vcc.ca'));
+                    SET EMAIL = REPLACE(EMAIL, ' ', '');
+                    RETURN EMAIL;
  				end //
 DELIMITER ;
 
 
 -- Create a function called calculateTax that returns a 2 digit decimal and calculates the tax that is 12% of the price 
 DELIMITER //
+DROP FUNCTION IF EXISTS calculateTax;
 create function calculateTax(price float)
-returns float
+returns DECIMAL(9,2)
  		
  			
  				begin
- 					return price * 0.12;
+ 					return price+(price * 0.12);
  				end //
 DELIMITER ;

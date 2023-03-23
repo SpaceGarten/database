@@ -38,7 +38,7 @@ CREATE TABLE factTable (
     product_id INT NOT NULL,
     FOREIGN KEY (area_code) REFERENCES location(area_code),
     FOREIGN KEY (product_id) REFERENCES product(product_id),
-    ALTER TABLE factTable ADD COLUMN new_date DATETIME;
+    date DATETIME NOT NULL
 
 );
 
@@ -62,3 +62,16 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+
+
+
+
+-- create a procedure that updates the date format in factTable from 'YYYY-MM-DD HH:MM:SS' to 'YYYY-MM-DD HH:MM:SS AM/PM'
+delimiter //
+create procedure update_date_time()
+begin
+    update factTable
+    set date = convert_date_time(date);
+end//
+delimiter ;

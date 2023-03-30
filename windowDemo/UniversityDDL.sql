@@ -148,10 +148,13 @@ order by s.ID;
 
 
 -- query A list of the rooms, their capacity, the building capacity and the total capacity, for all the rooms in all the buildings
-select c.building, c.room_number, c.capacity, b.capacity as building_capacity, sum(c.capacity) over (partition by c.building) as total_capacity
-from classroom c, classroom b
-where c.building = b.building
-order by c.building, c.room_number;
+select c.building, 
+c.room_number, 
+c.capacity, 
+sum(c.capacity) over (partition by c.building) as building_capacity,
+SUM(c.capacity) over () as total_capacity
+from classroom c;
+
 
 
 

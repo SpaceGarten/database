@@ -1,4 +1,7 @@
-  -- Select all the rows for ContactName and Contact Title in the Orders Database
+-- C:\xampp\mysql\bin  
+
+
+-- Select all the rows for ContactName and Contact Title in the Orders Database
 
 SELECT ContactName, ContactTitle
 FROM Customers

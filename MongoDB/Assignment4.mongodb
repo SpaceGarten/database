@@ -1,13 +1,53 @@
 use ("week16")
 //  db.customer.countDocuments();
 
-// // aggregate the number of customers in each state
+// aggregate the number of customers in each state
 // db.customer.aggregate([
 //     {$group: {_id: "$state", count: {$sum: 1}}}
 // ]);
 
-// get the number of employees per department with the department name
-db.employee.aggregate([
-    {$group: {_id: "$department_id", count: {$sum: 1}}}
-]);
+// Q1 get the number of employees per department with the department name
+// db.employee.aggregate([
+//     {$group: {_id: "$department_id", count: {$sum: 1}}}
+// ]);
 
+// Q2 get the customer age and the count of all customers at that age in the US
+// db.customer.aggregate([
+//     {$match: {"address.country": "US"}},
+//     {$project: {_id: 0, customer_age: 1}}
+// ]);
+
+
+// Q3 get the number of customers for each type of education, sorted in reverse alphabetical order
+// db.customer.aggregate([
+//     {$group: {_id: "$education", count: {$sum: 1}}},
+//     {$sort: {_id: -1}}
+// ]);
+
+
+// Q4 aggregate all the females from the province of BC age 40 and over, return their first and last name with phone number
+// db.customers.find([
+//       "address.state_province": "BC",
+//       "marital_status": "S",
+//       "gender": "F",
+//       "customer_age": { "$gte": 40 },
+//   {
+//     $project: {
+//       _id: 0,
+//       fname: 1,
+//       lname: 1,
+//       phone1: "$contact.phone1",
+//       phone2: "$contact.phone2"
+//     }
+//   }
+// ])
+
+
+// Q5
+
+// Q6 find the address and number of amenities per each house in the realEstate collection. Show the houses with the most number of amenities first, no rental houses
+db.realEstate.aggregate([
+    {$match: {"rental": false}},
+    {$project: {_id: 0, address: 1, amenities: {$size: "$amenities"}}},
+    {$sort: {amenities: -1}}
+]);

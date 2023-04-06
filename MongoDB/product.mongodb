@@ -1,0 +1,29 @@
+
+// db.customer.aggregate([
+//     { $match: { "address.country": "Canada" }}
+//     , { $group: { _id: "$address.country", totalCustomers: { $sum: 1 }}}
+
+// ])
+
+
+// db.customer.aggregate([
+//     {$match: {'address.country': 'Mexico', 'marital_status': { $ne: "M"}}},
+//     {$project: {_id: 0, fname:1, lname:1, "contact.phone1":1, 'address.city':1, 'marital_status':1}},
+//     {$sort: {'lname':-1, 'customer_age':1}} 
+// ])
+
+// aggregate all the customers from camacho city
+
+// db.customer.aggregate([
+//     {$match: {'address.city': 'Camacho'}},
+//     {$project: {_id: 0, fname:1, lname:1, "contact.phone1":1, 'address.city':1, 'marital_status':1}},
+//     {$sort: {'lname':-1, 'customer_age':1}}
+// ])
+
+
+// // show all the customers
+
+// db.customer.aggregate([
+//     {$project: {_id: 0, fname:1, lname:1, "contact.phone1":1, 'address.city':1, 'marital_status':1}},
+//     {$sort: {'lname':-1, 'customer_age':1}}
+// ])
